@@ -29,9 +29,10 @@ function generateRandomSensorDataList(centre, dimensions, intensityRange, count)
 const sensorDataList = generateRandomSensorDataList(
 	[48.8847, -124.3661],
 	[0.1, 0.1],
-	[0, 10],
+	[0, 1],
 	33
 )
+
 for(let index in sensorDataList) {
 	const { position, intensity } = sensorDataList[index]
 	L.marker(position)
@@ -40,3 +41,8 @@ for(let index in sensorDataList) {
 		.openPopup()
 	console.log(`Added marker:\n\t[${position[0]}, ${position[1]}]\n\t${intensity}`)
 }
+
+const sensorHeatMap = L.heatLayer(
+	sensorDataList.map(({ position: [x, y], intensity }) => [x, y, intensity] ),
+	{ minOpacity: 0.5 }
+).addTo(caycuseMap)
