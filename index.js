@@ -1,4 +1,4 @@
-const leafletMap = L.map('leaflet-map').setView([48.8847, -124.3661], 13)
+const caycuseMap = L.map('caycuse-map').setView([48.8847, -124.3661], 13)
 const tileLayerOptions = {
 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 	maxZoom: 18,
@@ -7,7 +7,7 @@ const tileLayerOptions = {
 	zoomOffset: -1,
 	accessToken: 'pk.eyJ1IjoibGV2aW13aWxsaWFtc29uIiwiYSI6ImNrcnY0Y3N5MzAzMHkyb24wNW9mMnhsN3EifQ.JnuBDAaykgIF24NJmdbi6A'
 }
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', tileLayerOptions).addTo(leafletMap)
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', tileLayerOptions).addTo(caycuseMap)
 
 function generateRandomSensorDataList(centre, dimensions, intensityRange, count) {
 	const [centreX, centreY] = centre
@@ -35,7 +35,7 @@ const sensorDataList = generateRandomSensorDataList(
 for(let index in sensorDataList) {
 	const { position, intensity } = sensorDataList[index]
 	L.marker(position)
-		.addTo(leafletMap)
+		.addTo(caycuseMap)
 		.bindPopup(`<b>Sensor ${index}</b>: <i>${intensity}</i>`)
 		.openPopup()
 	console.log(`Added marker:\n\t[${position[0]}, ${position[1]}]\n\t${intensity}`)
