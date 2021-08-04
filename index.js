@@ -15,14 +15,17 @@ function generateRandomSensorDataList(centre, dimensions, intensityRange, count)
 	const [intensityStart, intensityEnd] = intensityRange
 
 	const sensorDataList = []
-	for(let i = 0; i < count; ++i)
+	for(let i = 0; i < count; ++i){
+		x = centreX - width / 2 + Math.random() * width,	// set the generated number to a variable so we can check them
+		y = centreY - height / 2 + Math.random() * height	// same as x
+		if (inWater(i,x,y)==true) {								// call inWater function to check if the expected point is in water, if it is move it down 20 pixels
+			x = x-0.020
+		}
 		sensorDataList.push({
-			position: [
-				centreX - width / 2 + Math.random() * width,
-				centreY - height / 2 + Math.random() * height
-			],
-			intensity: intensityStart + Math.random() * (intensityEnd - intensityStart)
+			position: [x,y],
+			intensity: intensityStart + Math.random() * (intensityEnd - intensityStart) * 50
 		})
+	}
 	return sensorDataList
 }
 
@@ -46,3 +49,8 @@ const sensorHeatMap = L.heatLayer(
 	sensorDataList.map(({ position: [x, y], intensity }) => [x, y, intensity] ),
 	{ minOpacity: 0.5 }
 ).addTo(caycuseMap)
+
+function inWater(i,x,y) {
+	//console.log(i+": " + x + ", " + y + "\n")
+	return false
+}
