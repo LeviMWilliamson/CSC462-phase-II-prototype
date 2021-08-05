@@ -47,10 +47,11 @@ for(let index in sensorDataList) {
 
 const sensorHeatMap = L.heatLayer(
 	sensorDataList.map(({ position: [x, y], intensity }) => [x, y, intensity] ),
-	{ minOpacity: 0.5 }
+	{ minOpacity: 0.5 , radius: 40}
 ).addTo(caycuseMap)
 
+
+
 function inWater(i,x,y) {
-	//console.log(i+": " + x + ", " + y + "\n")
 	return false
 }
